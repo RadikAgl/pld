@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'locations.apps.LocationsConfig',
     'adminsortable2',
+    "django_prose_editor",
 ]
 
 MIDDLEWARE = [

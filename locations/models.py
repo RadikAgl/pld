@@ -1,12 +1,15 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import Max
+from django_prose_editor.sanitized import SanitizedProseEditorField
 
 
 class Place(models.Model):
     title = models.CharField(max_length=255, verbose_name='Название')
     description_short = models.TextField(blank=True, verbose_name='Короткое описание')
-    description_long = models.TextField(blank=True, verbose_name='Полное описание (HTML)')
+    description_long = SanitizedProseEditorField(
+            verbose_name='Полное описание (HTML)'
+        )
     lng = models.DecimalField(
         max_digits=17, decimal_places=14,
         validators=[MinValueValidator(-180), MaxValueValidator(180)],
