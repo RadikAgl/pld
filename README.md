@@ -47,4 +47,4 @@
   python manage.py runserver 
    ```
 
-Данный проект запушен на .pythonanywhere.com
+Данный проект запущен на radikagl.pythonanywhere.com
