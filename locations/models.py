@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db.models import Max
 
 
 class Place(models.Model):
@@ -18,8 +19,8 @@ class Place(models.Model):
     )
 
     class Meta:
-        verbose_name = 'Место'
-        verbose_name_plural = 'Места'
+        verbose_name = 'Локация'
+        verbose_name_plural = 'Локации'
 
     def __str__(self):
         return self.title
@@ -27,13 +28,19 @@ class Place(models.Model):
 
 class PlaceImage(models.Model):
     place = models.ForeignKey(Place, related_name='imgs', on_delete=models.CASCADE, verbose_name='Место')
-    image = models.ImageField(upload_to='places/%Y/%m/%d/', verbose_name='Картинка')
-    position = models.PositiveIntegerField(default=0, db_index=True, verbose_name='Порядок')
+    image = models.ImageField(upload_to='places/%Y/%m/%d/', verbose_name='Изображение')
+    position = models.PositiveIntegerField(default=0, db_index=True, verbose_name='Позиция')
 
     class Meta:
-        ordering = ['position', 'id']
-        verbose_name = 'Изображение места'
-        verbose_name_plural = 'Изображения места'
+        ordering = ['position',]
+        verbose_name = 'Изображение локации'
+        verbose_name_plural = 'Изображения локации'
+
+    def save(self, *args, **kwargs):
+        if not self.pk and (self.position is None or self.position == 0):
+            last = PlaceImage.objects.filter(place=self.place).aggregate(Max('position'))['position__max'] or 0
+            self.position = last + 1
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.place} — {self.position}'

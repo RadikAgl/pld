@@ -22,7 +22,7 @@ from locations.views import IndexView, PlaceDetailsView
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
-    path('places/<int:pk>.json', PlaceDetailsView.as_view(), name='place_details'),
+    path('places/<int:pk>', PlaceDetailsView.as_view(), name='place_details'),
     path('admin/', admin.site.urls),
 ]
 
