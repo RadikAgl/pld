@@ -1,14 +1,6 @@
 # Интересные места Москвы
 
-## Запуск проекта
-
-   ```shell
-   python -m venv my-env
-   my-env\Scripts\activate
-   pip install -r requirements.txt
-   python manage.py migrate
-   python manage.py runserver
-   ```
+Проект предоставляет карту Москвы с метками интересных мест. Клик по метке отображает краткую информациб о локации и изобажения.
 ## Запуск проекта
 
 ### Скачайте проект
@@ -46,5 +38,6 @@
    ```shell
   python manage.py runserver 
    ```
+
 
 Данный проект запущен на radikagl.pythonanywhere.com
