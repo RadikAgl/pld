@@ -14,7 +14,7 @@
 ### Скачайте проект
 
    ```shell
-   git clone
+   git clone https://github.com/RadikAgl/pld.git
    ```
 
 ### Настройка виртуального окружения
